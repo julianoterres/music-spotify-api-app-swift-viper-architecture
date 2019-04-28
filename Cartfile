@@ -1,0 +1,5 @@
+github "onevcat/Kingfisher" ~> 5.0
+github "Alamofire/Alamofire" "4.8.0"
+github "Quick/Quick"
+github "Quick/Nimble"
+github "hackiftekhar/IQKeyboardManager"
