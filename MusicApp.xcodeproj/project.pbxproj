@@ -40,6 +40,9 @@
 		E3157688227537E000D365FE /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3157687227537E000D365FE /* LoginRouter.swift */; };
 		E315768A2275381100D365FE /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31576892275381100D365FE /* LoginProtocols.swift */; };
 		E31576922275552100D365FE /* ArtistsListCellFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31576912275552100D365FE /* ArtistsListCellFooter.swift */; };
+		E31576962276872900D365FE /* ArtistApiTrackAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31576952276872900D365FE /* ArtistApiTrackAlbum.swift */; };
+		E31576982276875F00D365FE /* ArtistApiTrackAlbumImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31576972276875F00D365FE /* ArtistApiTrackAlbumImage.swift */; };
+		E315769A227755DF00D365FE /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3157699227755DF00D365FE /* IntExtension.swift */; };
 		E3DEED7322720D7C00770C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DEED7222720D7C00770C92 /* AppDelegate.swift */; };
 		E3DEED7A22720D7E00770C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3DEED7922720D7E00770C92 /* Assets.xcassets */; };
 		E3DEED7D22720D7E00770C92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3DEED7B22720D7E00770C92 /* LaunchScreen.storyboard */; };
@@ -123,6 +126,9 @@
 		E31576892275381100D365FE /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
 		E315768F22754B0B00D365FE /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		E31576912275552100D365FE /* ArtistsListCellFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsListCellFooter.swift; sourceTree = "<group>"; };
+		E31576952276872900D365FE /* ArtistApiTrackAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistApiTrackAlbum.swift; sourceTree = "<group>"; };
+		E31576972276875F00D365FE /* ArtistApiTrackAlbumImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistApiTrackAlbumImage.swift; sourceTree = "<group>"; };
+		E3157699227755DF00D365FE /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		E3DEED6F22720D7C00770C92 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DEED7222720D7C00770C92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3DEED7922720D7E00770C92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -227,6 +233,8 @@
 			children = (
 				E31576552274CF7500D365FE /* ArtistApiResponse.swift */,
 				E31576572274CF9E00D365FE /* ArtistApiTrack.swift */,
+				E31576952276872900D365FE /* ArtistApiTrackAlbum.swift */,
+				E31576972276875F00D365FE /* ArtistApiTrackAlbumImage.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -367,7 +375,7 @@
 				E31576392273CD0000D365FE /* Definitions */,
 				E3DEEDD52273614600770C92 /* Entity */,
 				E3DEEDD2227253A700770C92 /* Extensions */,
-				E3DEEDB72272227200770C92 /* Libs */,
+				E3DEEDB72272227200770C92 /* Libraries */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -398,14 +406,14 @@
 			path = ArtistsLists;
 			sourceTree = "<group>";
 		};
-		E3DEEDB72272227200770C92 /* Libs */ = {
+		E3DEEDB72272227200770C92 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				E3DEEE1D22738D1E00770C92 /* Auth */,
 				E3DEEDB82272227D00770C92 /* Network */,
 				E3DEEDBD2272231700770C92 /* UrlsApi */,
 			);
-			path = Libs;
+			path = Libraries;
 			sourceTree = "<group>";
 		};
 		E3DEEDB82272227D00770C92 /* Network */ = {
@@ -448,6 +456,7 @@
 				E3157682227522B000D365FE /* UISearchBarExtension.swift */,
 				E315768022751C5800D365FE /* UIViewControllerExtension.swift */,
 				E3DEEDD3227253B500770C92 /* UIViewExtension.swift */,
+				E3157699227755DF00D365FE /* IntExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -706,7 +715,9 @@
 				E31576442274A7C400D365FE /* ArtistTracksView.swift in Sources */,
 				E315764C2274A80100D365FE /* ArtistTracksRouter.swift in Sources */,
 				E31576612274D29D00D365FE /* ArtistTracksInteractor.swift in Sources */,
+				E31576982276875F00D365FE /* ArtistApiTrackAlbumImage.swift in Sources */,
 				E3DEEE242273AA5A00770C92 /* TokenResponse.swift in Sources */,
+				E315769A227755DF00D365FE /* IntExtension.swift in Sources */,
 				E3DEEE1F22738D2B00770C92 /* Auth.swift in Sources */,
 				E3DEEDC3227223CE00770C92 /* AppRouter.swift in Sources */,
 				E3DEEDDA2273621E00770C92 /* ArtistsApiResponseEntity.swift in Sources */,
@@ -716,6 +727,7 @@
 				E315763B2273CD1100D365FE /* EnumDefinition.swift in Sources */,
 				E3DEEDAA2272126000770C92 /* ArtistsListView.swift in Sources */,
 				E31576862275377600D365FE /* LoginView.swift in Sources */,
+				E31576962276872900D365FE /* ArtistApiTrackAlbum.swift in Sources */,
 				E3DEEDAE227213A000770C92 /* ArtistsListInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

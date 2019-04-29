@@ -35,7 +35,6 @@ class ArtistsListView: UIViewController {
     view.backgroundColor = .background
     navigationController?.setup()
     setupBackButton()
-    //presenter?.fetchArtists(termSearch: "Bob")
   }
   
   func addElementsInScreen() {
@@ -70,8 +69,9 @@ class ArtistsListView: UIViewController {
     tableView.rowHeight = UITableView.automaticDimension
     tableView.separatorStyle = .none
     tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-    tableView.isHidden = true
-    tableView.isUserInteractionEnabled = false
+    presenter?.fetchArtists(termSearch: "Bob Marley")
+//    tableView.isHidden = true
+//    tableView.isUserInteractionEnabled = false
     tableView.addConstraint(attribute: .top, alignElement: searchBar, alignElementAttribute: .bottom, constant: 0)
     tableView.addConstraint(attribute: .right, alignElement: view, alignElementAttribute: .right, constant: 0)
     tableView.addConstraint(attribute: .left, alignElement: view, alignElementAttribute: .left, constant: 0)
@@ -190,8 +190,7 @@ extension ArtistsListView: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let artistId = artistsEntities[indexPath.row].id
-    presenter?.goToPlaylistScreen(artistId: artistId)
+    presenter?.goToPlaylistScreen(artist: artistsEntities[indexPath.row])
   }
   
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

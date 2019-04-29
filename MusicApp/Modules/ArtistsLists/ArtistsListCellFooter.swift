@@ -33,8 +33,7 @@ class ArtistsListCellFooter: UIView {
     loader.addConstraint(attribute: .centerX, alignElement: self, alignElementAttribute: .centerX, constant: 0)
     loader.addConstraint(attribute: .centerY, alignElement: self, alignElementAttribute: .centerY, constant: 0)
     loader.addConstraint(attribute: .height, alignElement: nil, alignElementAttribute: .notAnAttribute, constant: 20)
-    loader.addConstraint(attribute: .width, alignElement: nil, alignElementAttribute: .notAnAttribute, constant: 20)
-    
+    loader.addConstraint(attribute: .width, alignElement: nil, alignElementAttribute: .notAnAttribute, constant: 20) 
   }
   
 }

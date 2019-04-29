@@ -47,8 +47,8 @@ extension ArtistsListRouter: ArtistsListRouterProtocol {
 // MARK: Methods of ArtistsListPresenterToRouterProtocol
 extension ArtistsListRouter: ArtistsListPresenterToRouterProtocol {
   
-  func goToPlaylistScreen(artistId: String) {
-    let artistDetailsView = ArtistTracksRouter().buildModule(artistId: artistId)
+  func goToPlaylistScreen(artist: ArtistsEntity) {
+    let artistDetailsView = ArtistTracksRouter().buildModule(artist: artist)
     view?.navigationController?.pushViewController(artistDetailsView, animated: true)
   }
   

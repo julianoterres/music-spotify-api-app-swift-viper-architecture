@@ -18,7 +18,7 @@ class ArtistTracksRouter {
 // MARK: Methods of ArtistTracksRouterProtocol
 extension ArtistTracksRouter: ArtistTracksRouterProtocol {
   
-  func buildModule(artistId: String) -> UIViewController {
+  func buildModule(artist: ArtistsEntity) -> UIViewController {
     let view = ArtistTracksView()
     let presenter = ArtistTracksPresenter()
     let interactor = ArtistTracksInteractor()
@@ -28,7 +28,7 @@ extension ArtistTracksRouter: ArtistTracksRouterProtocol {
     let urlsApi = UrlsApi()
     let auth = Auth(network: network, urlsApi: urlsApi)
     view.presenter = presenter
-    view.artistId = artistId
+    view.artist = artist
     presenter.interactor = interactor
     presenter.router = router
     presenter.interactor = interactor

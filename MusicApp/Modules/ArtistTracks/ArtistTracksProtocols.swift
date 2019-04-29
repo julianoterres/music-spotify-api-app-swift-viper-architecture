@@ -11,6 +11,8 @@ import UIKit
 // MARK: Methods of View to Presenter
 protocol ArtistTracksViewToPresenterProtocol: class {
   func fetchTracks(artistId: String)
+  func playPrevTrack()
+  func playNextTrack(totalTracks: Int)
 }
 
 // MARK: Methods of Presenter Protocol
@@ -23,6 +25,7 @@ protocol ArtistTracksPresenterProtocol: class {
 // MARK: Methods of Presenter to View
 protocol ArtistTracksPresenterToViewProtocol: class {
   var presenter: ArtistTracksViewToPresenterProtocol? { get set }
+  func setupPlayTrack(currentTrackKey: Int)
   func showTracks(tracks: [TrackEntity])
 }
 
@@ -63,6 +66,6 @@ protocol ArtistTracksWorkerToInteractorProtocol: class {
 // MARK: Methods of Router Protocol
 protocol ArtistTracksRouterProtocol: class {
   var view: UIViewController? { get set }
-  func buildModule(artistId: String) -> UIViewController
+  func buildModule(artist: ArtistsEntity) -> UIViewController
 }
 

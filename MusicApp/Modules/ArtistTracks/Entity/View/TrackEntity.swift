@@ -9,6 +9,9 @@
 import Foundation
 
 struct TrackEntity: Codable {
+  let duration: String
+  let info: String
+  let image: URL?
   let name: String
   let url: URL?
 }

@@ -24,8 +24,8 @@ extension ArtistsListPresenter: ArtistsListViewToPresenterProtocol {
     interactor?.fetchArtists(termSearch: termSearch)
   }
   
-  func goToPlaylistScreen(artistId: String) {
-    router?.goToPlaylistScreen(artistId: artistId)
+  func goToPlaylistScreen(artist: ArtistsEntity) {
+    router?.goToPlaylistScreen(artist: artist)
   }
   
 }

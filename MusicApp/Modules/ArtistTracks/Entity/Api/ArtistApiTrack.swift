@@ -7,6 +7,8 @@
 //
 
 struct ArtistApiTrack: Codable {
+  let album: ArtistApiTrackAlbum
+  let duration_ms: Int
   let id: String
   let name: String
   let popularity: Int

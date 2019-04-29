@@ -51,7 +51,7 @@ extension ArtistsListInteractor: ArtistsListWorkerToInteractorProtocol {
       
       var imageUrl = PlaceholderNoImage.noImage640.rawValue
       
-      if let image = artist.images.filter({ $0.width >= 320 }).first {
+      if let image = artist.images.filter({ $0.width >= 300 }).first {
         imageUrl = image.url
       }
       

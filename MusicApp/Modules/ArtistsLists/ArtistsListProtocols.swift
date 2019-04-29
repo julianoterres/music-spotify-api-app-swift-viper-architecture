@@ -11,7 +11,7 @@ import UIKit
 // MARK: Methods of View to Presenter
 protocol ArtistsListViewToPresenterProtocol: class {
   func fetchArtists(termSearch: String)
-  func goToPlaylistScreen(artistId: String)
+  func goToPlaylistScreen(artist: ArtistsEntity)
 }
 
 // MARK: Methods of Presenter Protocol
@@ -36,7 +36,7 @@ protocol ArtistsListPresenterToInteractorProtocol: class {
 
 // MARK: Methods of Presenter to Router
 protocol ArtistsListPresenterToRouterProtocol: class {
-  func goToPlaylistScreen(artistId: String)
+  func goToPlaylistScreen(artist: ArtistsEntity)
 }
 
 // MARK: Methods of Interactor Protocol
