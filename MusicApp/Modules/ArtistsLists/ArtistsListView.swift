@@ -21,6 +21,7 @@ class ArtistsListView: UIViewController {
   
   var presenter: ArtistsListViewToPresenterProtocol?
   var artistsEntities: [ArtistsEntity] = []
+  var fetchetAllArtists = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -152,8 +153,9 @@ class ArtistsListView: UIViewController {
 // MARK: Methods of ArtistsListPresenterToViewProtocol
 extension ArtistsListView: ArtistsListPresenterToViewProtocol {
   
-  func showArtists(entities: [ArtistsEntity]) {
+  func showArtists(entities: [ArtistsEntity], fetchetAll: Bool) {
     artistsEntities = entities
+    fetchetAllArtists = fetchetAll
     tableView.reloadData()
     alertContainer.isHidden = true
     tableView.isHidden = false
@@ -193,7 +195,7 @@ extension ArtistsListView: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    return 44
+    return (fetchetAllArtists) ? 0 : 44
   }
   
   func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

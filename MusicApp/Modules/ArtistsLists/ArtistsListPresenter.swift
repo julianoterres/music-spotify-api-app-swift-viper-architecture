@@ -33,9 +33,9 @@ extension ArtistsListPresenter: ArtistsListViewToPresenterProtocol {
 // MARK: Methods of ArtistsListInteractorToPresentProtocol
 extension ArtistsListPresenter: ArtistsListInteractorToPresentProtocol {
   
-  func fetchedArtists(entities: [ArtistsEntity]) {
+  func fetchedArtists(entities: [ArtistsEntity], fetchetAll: Bool) {
     if entities.count > 0 {
-      view?.showArtists(entities: entities)
+      view?.showArtists(entities: entities, fetchetAll: fetchetAll)
     } else {
       view?.notFoundResults()
     }

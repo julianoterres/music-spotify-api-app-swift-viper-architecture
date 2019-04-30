@@ -76,7 +76,8 @@ extension ArtistsListInteractor: ArtistsListWorkerToInteractorProtocol {
     artistsSaved.append(contentsOf: artists)
     loadingActive = false
     totalArtists = artistsApi.artists.total
-    presenter?.fetchedArtists(entities: artistsSaved)
+    let fetchetAll = artistsSaved.count >= totalArtists
+    presenter?.fetchedArtists(entities: artistsSaved, fetchetAll: fetchetAll)
     
   }
   

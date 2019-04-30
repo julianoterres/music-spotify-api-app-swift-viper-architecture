@@ -24,7 +24,7 @@ protocol ArtistsListPresenterProtocol: class {
 // MARK: Methods of Presenter to View
 protocol ArtistsListPresenterToViewProtocol: class {
   var presenter: ArtistsListViewToPresenterProtocol? { get set }
-  func showArtists(entities: [ArtistsEntity])
+  func showArtists(entities: [ArtistsEntity], fetchetAll: Bool)
   func notFoundResults()
   func showError(error: String)
 }
@@ -52,7 +52,7 @@ protocol ArtistsListInteractorToWorkerProtocol: class {
 
 // MARK: Methods of Interactor to Presenter
 protocol ArtistsListInteractorToPresentProtocol: class {
-  func fetchedArtists(entities: [ArtistsEntity])
+  func fetchedArtists(entities: [ArtistsEntity], fetchetAll: Bool)
   func fetchedFail(error: String)
 }
 
