@@ -25,19 +25,23 @@ class ArtistTracksView: UIViewController {
   let buttonPlay = UIButton()
   let buttonPause = UIButton()
   let buttonNext = UIButton()
+  let alertContainer = UIView()
+  let alertImage = UIImageView()
+  let alertTitle = UILabel()
+  let alertText = UILabel()
   
   var presenter: ArtistTracksViewToPresenterProtocol?
   var artist: ArtistsEntity!
   var tracksEntities: [TrackEntity] = []
   var player: AVPlayer?
   var timer: Timer!
-  var playActive = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()
     addElementsInScreen()
     presenter?.fetchTracks(artistId: artist.id)
+    NotificationCenter.default.addObserver(self,selector: #selector(whenPlayerEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -63,6 +67,10 @@ class ArtistTracksView: UIViewController {
     addButtonPause()
     addButtonNext()
     addTableView()
+    addAlertContainer()
+    addAlertImage()
+    addAlertTitle()
+    addAlertText()
   }
   
   func addPlayerContainer() {
@@ -185,6 +193,48 @@ class ArtistTracksView: UIViewController {
     tableView.addConstraint(attribute: .bottom, alignElement: view, alignElementAttribute: .bottom, constant: 0)
   }
   
+  func addAlertContainer() {
+    view.addSubview(alertContainer)
+    alertContainer.backgroundColor = .background
+    alertContainer.isUserInteractionEnabled = false
+    alertContainer.addConstraint(attribute: .centerX, alignElement: view, alignElementAttribute: .centerX, constant: 0)
+    alertContainer.addConstraint(attribute: .centerY, alignElement: view, alignElementAttribute: .centerY, constant: 0)
+  }
+  
+  func addAlertImage() {
+    alertContainer.addSubview(alertImage)
+    alertImage.clipsToBounds = true
+    alertImage.contentMode = .scaleAspectFill
+    alertImage.addConstraint(attribute: .top, alignElement: alertContainer, alignElementAttribute: .top, constant: 0)
+    alertImage.addConstraint(attribute: .centerX, alignElement: alertContainer, alignElementAttribute: .centerX, constant: 0)
+    alertImage.addConstraint(attribute: .width, alignElement: nil, alignElementAttribute: .notAnAttribute, constant: 50)
+    alertImage.addConstraint(attribute: .height, alignElement: nil, alignElementAttribute: .notAnAttribute, constant: 50)
+  }
+  
+  func addAlertTitle() {
+    alertContainer.addSubview(alertTitle)
+    alertTitle.numberOfLines = 0
+    alertTitle.textColor = .white
+    alertTitle.font = .fontBold15
+    alertTitle.textAlignment = .center
+    alertTitle.addConstraint(attribute: .top, alignElement: alertImage, alignElementAttribute: .bottom, constant: 10)
+    alertTitle.addConstraint(attribute: .right, alignElement: alertContainer, alignElementAttribute: .right, constant: 0)
+    alertTitle.addConstraint(attribute: .left, alignElement: alertContainer, alignElementAttribute: .left, constant: 0)
+    
+  }
+  
+  func addAlertText() {
+    alertContainer.addSubview(alertText)
+    alertText.textColor = .fontGray
+    alertText.font = .fontRegular12
+    alertText.numberOfLines = 0
+    alertText.textAlignment = .center
+    alertText.addConstraint(attribute: .top, alignElement: alertTitle, alignElementAttribute: .bottom, constant: 10)
+    alertText.addConstraint(attribute: .right, alignElement: alertContainer, alignElementAttribute: .right, constant: 0)
+    alertText.addConstraint(attribute: .left, alignElement: alertContainer, alignElementAttribute: .left, constant: 0)
+    alertText.addConstraint(attribute: .bottom, alignElement: alertContainer, alignElementAttribute: .bottom, constant: 0)
+  }
+  
   @objc func pressButtonPrev(button: UIButton) {
     presenter?.playPrevTrack()
   }
@@ -214,7 +264,6 @@ class ArtistTracksView: UIViewController {
     buttonPause.isHidden = show
     buttonPlay.isUserInteractionEnabled = show
     buttonPlay.isHidden = !show
-    playActive = !show
   }
   
 }
@@ -224,11 +273,20 @@ extension ArtistTracksView :ArtistTracksPresenterToViewProtocol {
   
   func showTracks(tracks: [TrackEntity]) {
     tracksEntities = tracks
-    setupPlayTrack(currentTrackKey: 0)
+    setupPlayTrack(currentTrackKey: 0, autoPlay: false)
     tableView.reloadData()
   }
   
-  func setupPlayTrack(currentTrackKey: Int) {
+  func notFoundTracks() {
+    alertImage.image = UIImage(named: "icon_warning")
+    alertTitle.text = "Could not find tracks"
+    alertText.text = "This artist does not have\nany music with a play link."
+    playerContainer.isHidden = true
+    tableView.isHidden = true
+    alertContainer.isHidden = false
+  }
+  
+  func setupPlayTrack(currentTrackKey: Int, autoPlay: Bool) {
     let track = tracksEntities[currentTrackKey]
     let playerItem = AVPlayerItem(url: track.url!)
     player = AVPlayer(playerItem: playerItem)
@@ -238,9 +296,18 @@ extension ArtistTracksView :ArtistTracksPresenterToViewProtocol {
     timerTotal.text = "Track time " + track.duration
     timerCurrent.text = "Elapsed time 00:00"
     playerImage.kf.setImage(with: track.image)
-    if playActive {
+    showButtonPlay(!autoPlay)
+    if autoPlay {
       player?.play()
     }
+  }
+  
+  func endPlayList() {
+    showButtonPlay(false)
+  }
+  
+  @objc func whenPlayerEnd() {
+    presenter?.whenPlayerEnd(totalTracks: tracksEntities.count)
   }
   
 }
@@ -261,7 +328,7 @@ extension ArtistTracksView: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    setupPlayTrack(currentTrackKey: indexPath.row)
+    presenter?.playTrack(trackKey: indexPath.row)
   }
   
 }

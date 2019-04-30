@@ -69,7 +69,7 @@ class ArtistsListView: UIViewController {
     tableView.rowHeight = UITableView.automaticDimension
     tableView.separatorStyle = .none
     tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-    presenter?.fetchArtists(termSearch: "Bob Marley")
+    presenter?.fetchArtists(termSearch: "Anita")
 //    tableView.isHidden = true
 //    tableView.isUserInteractionEnabled = false
     tableView.addConstraint(attribute: .top, alignElement: searchBar, alignElementAttribute: .bottom, constant: 0)

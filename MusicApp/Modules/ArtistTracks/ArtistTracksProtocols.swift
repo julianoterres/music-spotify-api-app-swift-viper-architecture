@@ -11,8 +11,10 @@ import UIKit
 // MARK: Methods of View to Presenter
 protocol ArtistTracksViewToPresenterProtocol: class {
   func fetchTracks(artistId: String)
+  func playTrack(trackKey: Int)
   func playPrevTrack()
   func playNextTrack(totalTracks: Int)
+  func whenPlayerEnd(totalTracks: Int)
 }
 
 // MARK: Methods of Presenter Protocol
@@ -25,8 +27,10 @@ protocol ArtistTracksPresenterProtocol: class {
 // MARK: Methods of Presenter to View
 protocol ArtistTracksPresenterToViewProtocol: class {
   var presenter: ArtistTracksViewToPresenterProtocol? { get set }
-  func setupPlayTrack(currentTrackKey: Int)
+  func setupPlayTrack(currentTrackKey: Int, autoPlay: Bool)
   func showTracks(tracks: [TrackEntity])
+  func notFoundTracks()
+  func endPlayList()
 }
 
 // MARK: Methods of Presenter to Interactor

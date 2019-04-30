@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IQKeyboardManagerSwift
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     mainScreen()
-    setupKeyboard()
+    setupAudioSpeakers()
     return true
   }
   
@@ -28,14 +28,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
-  private func setupKeyboard() {
-    IQKeyboardManager.shared.enable = true
-  }
-  
   private func mainScreen() {
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = AppRouter().buildMainScreen()
     window?.makeKeyAndVisible()
+  }
+  
+  private func setupAudioSpeakers() {
+    do {
+      try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+      try AVAudioSession.sharedInstance().setActive(true)
+    } catch {
+      print(error)
+    }
   }
 
 }

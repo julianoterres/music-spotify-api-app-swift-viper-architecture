@@ -12,4 +12,5 @@ struct ArtistApiTrack: Codable {
   let id: String
   let name: String
   let popularity: Int
+  let preview_url: String?
 }

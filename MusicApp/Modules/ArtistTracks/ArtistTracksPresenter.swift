@@ -25,11 +25,16 @@ extension ArtistTracksPresenter: ArtistTracksViewToPresenterProtocol {
     interactor?.fetchTracks(artistId: artistId)
   }
   
+  func playTrack(trackKey: Int) {
+    currentTrackPlay = trackKey
+    view?.setupPlayTrack(currentTrackKey: currentTrackPlay, autoPlay: true)
+  }
+  
   func playPrevTrack() {
     let prevTrack = currentTrackPlay - 1
     if prevTrack >= 0 {
       currentTrackPlay = prevTrack
-      view?.setupPlayTrack(currentTrackKey: currentTrackPlay)
+      view?.setupPlayTrack(currentTrackKey: currentTrackPlay, autoPlay: true)
     }
   }
   
@@ -37,7 +42,17 @@ extension ArtistTracksPresenter: ArtistTracksViewToPresenterProtocol {
     let nextTrack = currentTrackPlay + 1
     if nextTrack <= (totalTracks - 1) {
       currentTrackPlay = nextTrack
-      view?.setupPlayTrack(currentTrackKey: currentTrackPlay)
+      view?.setupPlayTrack(currentTrackKey: currentTrackPlay, autoPlay: true)
+    }
+  }
+  
+  func whenPlayerEnd(totalTracks: Int) {
+    let nextTrack = currentTrackPlay + 1
+    if nextTrack <= (totalTracks - 1) {
+      currentTrackPlay = nextTrack
+      view?.setupPlayTrack(currentTrackKey: currentTrackPlay, autoPlay: true)
+    } else {
+      view?.endPlayList()
     }
   }
   
@@ -47,7 +62,11 @@ extension ArtistTracksPresenter: ArtistTracksViewToPresenterProtocol {
 extension ArtistTracksPresenter: ArtistTracksInteractorToPresentProtocol {
   
   func fetchedTracks(tracks: [TrackEntity]) {
-    view?.showTracks(tracks: tracks)
+    if tracks.count > 0 {
+      view?.showTracks(tracks: tracks)
+    } else {
+      view?.notFoundTracks()
+    }
   }
   
 }
