@@ -15,6 +15,7 @@ class ArtistsListInteractor: ArtistsListInteractorProtocol {
   var worker: ArtistsListInteractorToWorkerProtocol?
   var artistsSaved: [ArtistsEntity] = []
   var termSearchSaved = ""
+  var totalArtists = 0
   let limit = 20
   var offset = 0
   var loadingActive = false
@@ -29,10 +30,11 @@ extension ArtistsListInteractor: ArtistsListPresenterToInteractorProtocol {
     if termSearchSaved != termSearch {
       termSearchSaved = termSearch
       offset = 0
+      totalArtists = 0
       artistsSaved.removeAll()
     }
     
-    if loadingActive == false && termSearch.isEmpty == false {
+    if loadingActive == false && termSearch.isEmpty == false && (artistsSaved.count < totalArtists || totalArtists == 0) {
       loadingActive = true
       worker?.fetchArtists(termSearch: termSearch, offset: offset, limit: limit)
       offset += limit
@@ -73,6 +75,7 @@ extension ArtistsListInteractor: ArtistsListWorkerToInteractorProtocol {
     
     artistsSaved.append(contentsOf: artists)
     loadingActive = false
+    totalArtists = artistsApi.artists.total
     presenter?.fetchedArtists(entities: artistsSaved)
     
   }
